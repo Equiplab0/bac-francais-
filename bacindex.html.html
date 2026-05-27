@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sujets Bac Français</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #f9e4ec; --rose-mid: #e8a4c0; --rose-dark: #c46a8f;
+    --lavande: #ede8f9; --lavande-mid: #b8a9e8; --lavande-dark: #7a5fb8;
+    --mint: #e2f4ef; --mint-mid: #8fd5be; --mint-dark: #3d9c7e;
+    --peche: #fdf0e2; --peche-mid: #f5c88a; --peche-dark: #d48c2e;
+    --bleu: #e4eef9; --bleu-mid: #90b8e8; --bleu-dark: #3a72b8;
+    --bg: #fdf8f5; --text: #2d2522; --text-muted: #7a6e6a;
+    --white: #ffffff; --border: rgba(0,0,0,0.08);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #fde8f0 0%, #ede8f9 50%, #e2f4ef 100%);
+    padding: 60px 32px 48px; text-align: center; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(228,147,186,0.18) 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, rgba(167,148,220,0.18) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block; background: var(--rose); color: var(--rose-dark);
+    font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 6px 16px; border-radius: 20px; border: 1px solid var(--rose-mid); margin-bottom: 20px;
+  }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(36px,6vw,58px); font-weight: 600; line-height: 1.15; margin-bottom: 14px; }
+  .hero h1 em { font-style: italic; color: var(--lavande-dark); }
+  .hero p { font-size: 16px; color: var(--text-muted); max-width: 480px; margin: 0 auto; line-height: 1.7; }
+  .hero-deco { position: absolute; font-family: 'Playfair Display', serif; font-size: 180px; opacity: 0.04; pointer-events: none; font-style: italic; line-height: 1; }
+  .hero-deco.left { left: -20px; top: -20px; }
+  .hero-deco.right { right: -20px; bottom: -20px; }
+
+  /* Main */
+  .main { max-width: 1100px; margin: 0 auto; padding: 48px 24px 80px; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  @media (max-width: 720px) { .main { grid-template-columns: 1fr; } }
+
+  /* Section card */
+  .section-card { border-radius: 20px; overflow: hidden; background: var(--white); border: 1px solid var(--border); box-shadow: 0 2px 20px rgba(0,0,0,0.04); }
+  .section-header { padding: 24px 28px 20px; position: relative; }
+  .section-header.rose { background: linear-gradient(135deg, var(--rose) 0%, #fce8f4 100%); }
+  .section-header.lavande { background: linear-gradient(135deg, var(--lavande) 0%, #e8e2f9 100%); }
+  .section-badge { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 4px 12px; border-radius: 12px; margin-bottom: 10px; }
+  .badge-rose { background: rgba(196,106,143,0.15); color: var(--rose-dark); }
+  .badge-lavande { background: rgba(122,95,184,0.15); color: var(--lavande-dark); }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 600; line-height: 1.2; margin-bottom: 6px; }
+  .section-title.rose { color: #a04a72; }
+  .section-title.lavande { color: #5a3d9a; }
+  .section-desc { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+  .section-deco { position: absolute; right: 20px; top: 50%; transform: translateY(-50%); font-family: 'Playfair Display', serif; font-size: 64px; font-style: italic; opacity: 0.12; line-height: 1; }
+  .deco-rose { color: var(--rose-dark); }
+  .deco-lavande { color: var(--lavande-dark); }
+
+  /* Subsections accordion */
+  .subsections { padding: 16px 20px 20px; }
+  .subsection { border-radius: 14px; overflow: hidden; margin-bottom: 12px; border: 1px solid var(--border); }
+  .subsection:last-child { margin-bottom: 0; }
+  .sub-toggle { width: 100%; display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: none; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500; color: var(--text); text-align: left; transition: background 0.15s; }
+  .sub-toggle:hover { background: var(--bg); }
+  .sub-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+  .icon-rose { background: var(--rose); }
+  .icon-lavande { background: var(--lavande); }
+  .icon-mint { background: var(--mint); }
+  .icon-peche { background: var(--peche); }
+  .icon-bleu { background: var(--bleu); }
+  .sub-label { flex: 1; line-height: 1.3; }
+  .sub-label small { font-size: 11px; color: var(--text-muted); display: block; }
+  .sub-count { font-size: 12px; color: var(--text-muted); background: var(--bg); padding: 2px 8px; border-radius: 10px; border: 1px solid var(--border); white-space: nowrap; }
+  .sub-arrow { width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; background: var(--bg); color: var(--text-muted); transition: transform 0.2s; flex-shrink: 0; }
+  .subsection.open .sub-arrow { transform: rotate(180deg); }
+  .sub-links { display: none; padding: 0 18px 14px 62px; flex-direction: column; gap: 6px; }
+  .subsection.open .sub-links { display: flex; }
+  .year-group { margin-bottom: 8px; }
+  .year-label { font-size: 11px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+  .links-row { display: flex; flex-wrap: wrap; gap: 6px; }
+  .subject-link { display: inline-flex; align-items: center; gap: 5px; padding: 5px 12px; border-radius: 10px; font-size: 13px; font-weight: 400; text-decoration: none; transition: all 0.15s; border: 1px solid transparent; }
+  .subject-link:hover { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+  .link-rose { background: var(--rose); color: var(--rose-dark); border-color: rgba(196,106,143,0.2); }
+  .link-rose:hover { background: #f5c8da; }
+  .link-lavande { background: var(--lavande); color: var(--lavande-dark); border-color: rgba(122,95,184,0.2); }
+  .link-lavande:hover { background: #ddd5f5; }
+  .link-mint { background: var(--mint); color: var(--mint-dark); border-color: rgba(61,156,126,0.2); }
+  .link-mint:hover { background: #c5ebde; }
+  .link-peche { background: var(--peche); color: var(--peche-dark); border-color: rgba(212,140,46,0.2); }
+  .link-peche:hover { background: #fae5be; }
+  .link-bleu { background: var(--bleu); color: var(--bleu-dark); border-color: rgba(58,114,184,0.2); }
+  .link-bleu:hover { background: #cce0f6; }
+  .link-arrow { font-size: 10px; opacity: 0.7; }
+
+  footer { text-align: center; padding: 24px; font-size: 13px; color: var(--text-muted); border-top: 1px solid var(--border); }
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-thumb { background: var(--rose-mid); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <span class="hero-deco left">C</span>
+  <span class="hero-deco right">D</span>
+  <div class="hero-tag">✦ Baccalauréat Français</div>
+  <h1>Retrouve tes <em>sujets</em><br>du Bac Français</h1>
+  <p>Tous les annales classés par épreuve, sous-thème et œuvre pour réviser efficacement.</p>
+</div>
+
+<div class="main">
+
+<!-- ========== COMMENTAIRE ========== -->
+<div class="section-card">
+  <div class="section-header rose">
+    <span class="section-badge badge-rose">Épreuve 1</span>
+    <div class="section-title rose">Commentaire</div>
+    <div class="section-desc">Analyse d'un texte littéraire tiré d'une des œuvres au programme</div>
+    <div class="section-deco deco-rose">C</div>
+  </div>
+  <div class="subsections">
+
+    <!-- ROMAN -->
+    <div class="subsection" id="c-roman">
+      <button class="sub-toggle" onclick="toggle('c-roman')">
+        <div class="sub-icon icon-rose">📖</div>
+        <span class="sub-label">Roman &amp; récit</span>
+        <span class="sub-count">31 sujets</span>
+        <div class="sub-arrow">▼</div>
+      </button>
+      <div class="sub-links">
+        <div class="year-group">
+          <div class="year-label">2025</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2025/francais-premiere-2025-amerique-sud-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Amérique Sud ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2025/francais-premiere-2025-metropole-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Métropole ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2025/francais-premiere-2025-antilles-guyane-remplacement-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Antilles-Guyane Rempl. ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2025/francais-premiere-2025-metropole-remplacement-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Métropole Rempl. ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2025/francais-premiere-2025-polynesie-remplacement-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Polynésie Rempl. ↗</a>
+          </div>
+        </div>
+        <div class="year-group">
+          <div class="year-label">2024</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2024/francais-premiere-2024-amerique-nord-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Amérique Nord ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2024/francais-premiere-2024-antilles-guyane-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Antilles-Guyane ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2024/francais-premiere-2024-metropole-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Métropole ↗</a>
+          </div>
+        </div>
+        <div class="year-group">
+          <div class="year-label">2023</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2023/francais-premiere-2023-nouvelle-caledonie-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Nouvelle-Calédonie ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2023/francais-premiere-2023-antilles-guyane-remplacement-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Antilles-Guyane Rempl. ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2023/francais-premiere-2023-metropole-remplacement-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Métropole Rempl. ↗</a>
+          </div>
+        </div>
+        <div class="year-group">
+          <div class="year-label">2022</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2022/francais-premiere-2022-antilles-guyane-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Antilles-Guyane ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2022/francais-premiere-2022-metropole-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Métropole ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2022/francais-premiere-2022-polynesie-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Polynésie ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2022/francais-premiere-2022-zero-1-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Zéro 1 ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2022/francais-premiere-2022-amerique-nord-remplacement-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Amérique Nord Rempl. ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2022/francais-premiere-2022-polynesie-remplacement-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Polynésie Rempl. ↗</a>
+          </div>
+        </div>
+        <div class="year-group">
+          <div class="year-label">2021</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2021/francais-premiere-2021-antilles-guyane-2-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Antilles-Guyane 2 ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2021/francais-premiere-2021-asie-2-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Asie 2 ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2021/francais-premiere-2021-metropole-1-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Métropole 1 ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2021/francais-premiere-2021-polynesie-1-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Polynésie 1 ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2021/francais-premiere-2021-antilles-guyane-remplacement-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Antilles-Guyane Rempl. ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2021/francais-premiere-2021-metropole-remplacement-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Métropole Rempl. ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2021/francais-premiere-2021-polynesie-2-remplacement-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Polynésie 2 Rempl. ↗</a>
+          </div>
+        </div>
+        <div class="year-group">
+          <div class="year-label">2020</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2020/francais-premiere-2020-nouvelle-caledonie-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Nouvelle-Calédonie ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2020/francais-premiere-2020-centres-etrangers-remplacement-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Centres étrangers Rempl. ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2020/francais-premiere-2020-polynesie-remplacement-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Polynésie Rempl. ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THEATRE -->
+    <div class="subsection" id="c-theatre">
+      <button class="sub-toggle" onclick="toggle('c-theatre')">
+        <div class="sub-icon icon-peche">🎭</div>
+        <span class="sub-label">Théâtre</span>
+        <span class="sub-count">8 sujets</span>
+        <div class="sub-arrow">▼</div>
+      </button>
+      <div class="sub-links">
+        <div class="year-group">
+          <div class="year-label">2025</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2025/francais-premiere-2025-metropole-secours-sujet-officiel.pdf" target="_blank" class="subject-link link-peche">Métropole Secours ↗</a>
+          </div>
+        </div>
+        <div class="year-group">
+          <div class="year-label">2024</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2024/francais-premiere-2024-centres-etrangers-sujet-officiel.pdf" target="_blank" class="subject-link link-peche">Centres étrangers ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2024/francais-premiere-2024-polynesie-sujet-officiel.pdf" target="_blank" class="subject-link link-peche">Polynésie ↗</a>
+          </div>
+        </div>
+        <div class="year-group">
+          <div class="year-label">2023</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2023/francais-premiere-2023-amerique-nord-sujet-officiel.pdf" target="_blank" class="subject-link link-peche">Amérique Nord ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2023/francais-premiere-2023-polynesie-remplacement-sujet-officiel.pdf" target="_blank" class="subject-link link-peche">Polynésie Rempl. ↗</a>
+          </div>
+        </div>
+        <div class="year-group">
+          <div class="year-label">2022</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2022/francais-premiere-2022-amerique-nord-sujet-officiel.pdf" target="_blank" class="subject-link link-peche">Amérique Nord ↗</a>
+          </div>
+        </div>
+        <div class="year-group">
+          <div class="year-label">2021</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2021/francais-premiere-2021-centres-etranger-1-sujet-officiel.pdf" target="_blank" class="subject-link link-peche">Centres étrangers 1 ↗</a>
+          </div>
+        </div>
+        <div class="year-group">
+          <div class="year-label">2020</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2020/francais-premiere-2020-antilles-guyane-remplacement-sujet-officiel.pdf" target="_blank" class="subject-link link-peche">Antilles-Guyane Rempl. ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LITTERATURE D'IDEES -->
+    <div class="subsection" id="c-idees">
+      <button class="sub-toggle" onclick="toggle('c-idees')">
+        <div class="sub-icon icon-mint">💡</div>
+        <span class="sub-label">Littérature d'idées</span>
+        <span class="sub-count">7 sujets</span>
+        <div class="sub-arrow">▼</div>
+      </button>
+      <div class="sub-links">
+        <div class="year-group">
+          <div class="year-label">2025</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2025/francais-premiere-2025-amerique-nord-sujet-officiel.pdf" target="_blank" class="subject-link link-mint">Amérique Nord ↗</a>
+          </div>
+        </div>
+        <div class="year-group">
+          <div class="year-label">2024</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2024/francais-premiere-2024-asie-sujet-officiel.pdf" target="_blank" class="subject-link link-mint">Asie ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2024/francais-premiere-2024-polynesie-remplacement-sujet-officiel.pdf" target="_blank" class="subject-link link-mint">Polynésie Rempl. ↗</a>
+          </div>
+        </div>
+        <div class="year-group">
+          <div class="year-label">2023</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2023/francais-premiere-2023-centres-etrangers-sujet-officiel.pdf" target="_blank" class="subject-link link-mint">Centres étrangers ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2023/francais-premiere-2023-metropole-sujet-officiel.pdf" target="_blank" class="subject-link link-mint">Métropole ↗</a>
+          </div>
+        </div>
+        <div class="year-group">
+          <div class="year-label">2022</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2022/francais-premiere-2022-centres-etrangers-sujet-officiel.pdf" target="_blank" class="subject-link link-mint">Centres étrangers ↗</a>
+          </div>
+        </div>
+        <div class="year-group">
+          <div class="year-label">2021</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2021/francais-premiere-2021-amerique-nord-2-sujet-officiel.pdf" target="_blank" class="subject-link link-mint">Amérique Nord 2 ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- POESIE -->
+    <div class="subsection" id="c-poesie">
+      <button class="sub-toggle" onclick="toggle('c-poesie')">
+        <div class="sub-icon icon-lavande">🌸</div>
+        <span class="sub-label">Poésie</span>
+        <span class="sub-count">22 sujets</span>
+        <div class="sub-arrow">▼</div>
+      </button>
+      <div class="sub-links">
+        <div class="year-group">
+          <div class="year-label">2025</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2025/francais-premiere-2025-antilles-guyane-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Antilles-Guyane ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2025/francais-premiere-2025-asie-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Asie ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2025/francais-premiere-2025-centres-etrangers-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Centres étrangers ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2025/francais-premiere-2025-nouvelle-caledonie-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Nouvelle-Calédonie ↗</a>
+          </div>
+        </div>
+        <div class="year-group">
+          <div class="year-label">2024</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2024/francais-premiere-2024-antilles-guyane-remplacement-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Antilles-Guyane Rempl. ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2024/francais-premiere-2024-metropole-remplacement-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Métropole Rempl. ↗</a>
+          </div>
+        </div>
+        <div class="year-group">
+          <div class="year-label">2023</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2023/francais-premiere-2023-asie-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Asie ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2023/francais-premiere-2023-antilles-guyane-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Antilles-Guyane ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2023/francais-premiere-2023-polynesie-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Polynésie ↗</a>
+          </div>
+        </div>
+        <div class="year-group">
+          <div class="year-label">2022</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2022/francais-premiere-2022-amerique-sud-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Amérique Sud ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2022/francais-premiere-2022-asie-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Asie ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2022/francais-premiere-2022-nouvelle-caledonie-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Nouvelle-Calédonie ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2022/francais-premiere-2022-antilles-guyane-remplacement-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Antilles-Guyane Rempl. ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2022/francais-premiere-2022-metropole-remplacement-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Métropole Rempl. ↗</a>
+          </div>
+        </div>
+        <div class="year-group">
+          <div class="year-label">2021</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2021/francais-premiere-2021-amerique-nord-1-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Amérique Nord 1 ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2021/francais-premiere-2021-metropole-2-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Métropole 2 ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2021/francais-premiere-2021-antilles-guyane-1-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Antilles-Guyane 1 ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2021/francais-premiere-2021-asie-1-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Asie 1 ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2021/francais-premiere-2021-centres-etranger-2-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Centres étrangers 2 ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2021/francais-premiere-2021-polynesie-2-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Polynésie 2 ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2021/francais-premiere-2021-polynesie-1-remplacement-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Polynésie 1 Rempl. ↗</a>
+          </div>
+        </div>
+        <div class="year-group">
+          <div class="year-label">2020</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2020/francais-premiere-2020-metropole-remplacement-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Métropole Rempl. ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ========== DISSERTATION ========== -->
+<div class="section-card">
+  <div class="section-header lavande">
+    <span class="section-badge badge-lavande">Épreuve 2</span>
+    <div class="section-title lavande">Dissertation</div>
+    <div class="section-desc">Réflexion argumentée sur une des 3 œuvres étudiées en classe</div>
+    <div class="section-deco deco-lavande">D</div>
+  </div>
+  <div class="subsections">
+
+    <!-- ROMAN -->
+    <div class="subsection" id="d-roman">
+      <button class="sub-toggle" onclick="toggle('d-roman')">
+        <div class="sub-icon icon-rose">📖</div>
+        <span class="sub-label">
+          <small>Roman</small>
+          Manon Lescaut · La Peau de chagrin · Sido
+        </span>
+        <span class="sub-count">15 sujets</span>
+        <div class="sub-arrow">▼</div>
+      </button>
+      <div class="sub-links">
+        <div class="year-group">
+          <div class="year-label">2025</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2025/francais-premiere-2025-amerique-nord-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Amérique Nord ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2025/francais-premiere-2025-nouvelle-caledonie-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Nouvelle-Calédonie ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2025/francais-premiere-2025-antilles-guyane-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Antilles-Guyane ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2025/francais-premiere-2025-metropole-secours-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Métropole Secours ↗</a>
+          </div>
+        </div>
+        <div class="year-group">
+          <div class="year-label">2024</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2024/francais-premiere-2024-metropole-remplacement-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Métropole Rempl. ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2024/francais-premiere-2024-asie-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Asie ↗</a>
+          </div>
+        </div>
+        <div class="year-group">
+          <div class="year-label">2023</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2023/francais-premiere-2023-amerique-nord-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Amérique Nord ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2023/francais-premiere-2023-metropole-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Métropole ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2023/francais-premiere-2023-polynesie-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Polynésie ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2023/francais-premiere-2023-polynesie-remplacement-sujet-officiel.pdf" target="_blank" class="subject-link link-rose">Polynésie Rempl. ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- POESIE -->
+    <div class="subsection" id="d-poesie">
+      <button class="sub-toggle" onclick="toggle('d-poesie')">
+        <div class="sub-icon icon-lavande">🌸</div>
+        <span class="sub-label">
+          <small>Poésie</small>
+          Mes forêts · Cahier de Douai · La Rage de l'expression
+        </span>
+        <span class="sub-count">6 sujets</span>
+        <div class="sub-arrow">▼</div>
+      </button>
+      <div class="sub-links">
+        <div class="year-group">
+          <div class="year-label">2025</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2025/francais-premiere-2025-antilles-guyane-remplacement-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Antilles-Guyane Rempl. ↗</a>
+          </div>
+        </div>
+        <div class="year-group">
+          <div class="year-label">2024</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2024/francais-premiere-2024-amerique-nord-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Amérique Nord ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2024/francais-premiere-2024-centres-etrangers-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Centres étrangers ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2024/francais-premiere-2024-metropole-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Métropole ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2024/francais-premiere-2024-polynesie-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Polynésie ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2024/francais-premiere-2024-polynesie-remplacement-sujet-officiel.pdf" target="_blank" class="subject-link link-lavande">Polynésie Rempl. ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- THEATRE -->
+    <div class="subsection" id="d-theatre">
+      <button class="sub-toggle" onclick="toggle('d-theatre')">
+        <div class="sub-icon icon-peche">🎭</div>
+        <span class="sub-label">
+          <small>Théâtre</small>
+          On ne badine pas · Le Menteur · Pour un oui ou pour un non
+        </span>
+        <span class="sub-count">5 sujets</span>
+        <div class="sub-arrow">▼</div>
+      </button>
+      <div class="sub-links">
+        <div class="year-group">
+          <div class="year-label">2025</div>
+          <div class="links-row">
+            <a href="https://www.sujetdebac.fr/annales-pdf/2025/francais-premiere-2025-amerique-sud-sujet-officiel.pdf" target="_blank" class="subject-link link-peche">Amérique Sud ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2025/francais-premiere-2025-polynesie-remplacement-sujet-officiel.pdf" target="_blank" class="subject-link link-peche">Polynésie Rempl. ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2025/francais-premiere-2025-nouvelle-caledonie-sujet-officiel.pdf" target="_blank" class="subject-link link-peche">Nouvelle-Calédonie ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf/2025/francais-premiere-2025-metropole-sujet-officiel.pdf" target="_blank" class="subject-link link-peche">Métropole ↗</a>
+            <a href="https://www.sujetdebac.fr/annales-pdf//2025/francais-premiere-2025-asie-sujet-officiel.pdf" target="_blank" class="subject-link link-peche">Asie ↗</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- end .main -->
+
+<footer>
+  Site de révision · Bac Français Première &nbsp;·&nbsp; Liens vers sujetdebac.fr
+</footer>
+
+<script>
+function toggle(id) {
+  const el = document.getElementById(id);
+  const wasOpen = el.classList.contains('open');
+  document.querySelectorAll('.subsection.open').forEach(s => s.classList.remove('open'));
+  if (!wasOpen) el.classList.add('open');
+}
+</script>
+</body>
+</html>
